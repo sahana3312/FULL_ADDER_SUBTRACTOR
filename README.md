@@ -36,18 +36,6 @@ Diff = A ⊕ B ⊕ Bin
 
 Borrow out = A'Bin + A'B + BBin
 
-**Truthtable**
-
-FULL ADDER 
-
-<img width="938" height="645" alt="image" src="https://github.com/user-attachments/assets/07dc6439-d405-4637-96df-6944802ec1de" />
-
-FULL SUBTRACTOR
-
-<img width="780" height="680" alt="image" src="https://github.com/user-attachments/assets/705ff4a1-628e-4d8c-8a91-63ab7fc15263" />
-
-
-
 **Procedure**
 
 Type the program in Quartus software.
@@ -70,38 +58,42 @@ RegisterNumber:25015837
 ```
 FULL ADDER
 
-module experiment4(sum,cout,a,b,cin);
-output sum;
-output cout;
-input a;
-input b;
-input cin;
-//internal nets
-wire s1,c1,c2;
-//Instantiate logic gate primitives
-xor (s1,a,b);
-and(c1,a,b);
-xor(sum,s1,cin);
-and(c2,s1,cin);
-or(cout,c2,c1);
-endmodule
+module ADD3(sum, cout, a, b, cin);
+    output sum;
+    output cout;
+    input a;
+    input b;
+    input cin;
 
+	 wire w1,w2,w3;
+	 assign w1=a^b;
+	 assign w2=a&b;
+	 assign w3=w1&cin;
+	 assign sum=w1^cin;
+	 assign cout=w2|w3;
+endmodule
 
 FULL SUSTRACTOR
 
+module SUB3(df, bo, a, b, bin);
 
-module experiment4a (df, bo, a, b, bin);
-output df;
-output bo;
-input a;
-input b;
-input bin;
-wire w1,w2, w3;
-assign w1=a^b;
-assign w2=(~a&b);
-assign w3=(-w1&bin);
-assign df-w1^bin;
-assign bo-w2/w3;
+    output df;
+    output bo;
+
+    input a;
+    input b;
+    input bin;
+
+    wire w1, w2, w3;
+
+    assign w1 = a ^ b;
+    assign df = w1 ^ bin;
+
+    assign w2 = (~a) & b;
+    assign w3 = (~w1) & bin;
+
+    assign bo = w2 | w3;
+
 endmodule
 ```
 **RTL Schematic**
@@ -109,27 +101,22 @@ endmodule
 
 #FULL ADDER
 
-<img width="573" height="298" alt="image" src="https://github.com/user-attachments/assets/184e5686-0b57-4ac4-8f7d-cd75923d2467" />
-
+<img width="752" height="350" alt="image" src="https://github.com/user-attachments/assets/a6bf97dc-ebf5-4afa-9d2a-a3674b12c344" />
 
 #FULL SUBTRACTOR
 
-<img width="376" height="181" alt="image" src="https://github.com/user-attachments/assets/a352791b-442b-499a-b1e2-e45b55467203" />
-
+<img width="792" height="352" alt="image" src="https://github.com/user-attachments/assets/e62ca824-643a-49e4-aa8c-83782cd775d8" />
 
 
 **Output Timing Waveform**
 
 #FULL ADDER 
 
-
-<img width="1022" height="418" alt="image" src="https://github.com/user-attachments/assets/6622fc0f-5e22-4eeb-b5ca-fa46ad551089" />
+<img width="1037" height="548" alt="image" src="https://github.com/user-attachments/assets/a0935fae-d194-472c-9552-6eeb123f4011" />
 
 FULL SUBTRACTOR
 
-<img width="1031" height="486" alt="image" src="https://github.com/user-attachments/assets/0af1d8c9-97b3-4f21-859c-627a499d0612" />
-
-
+<img width="1032" height="543" alt="image" src="https://github.com/user-attachments/assets/2173c69b-665b-455f-ba0a-5b4ae4a375f1" />
 
 **Result:**
 
